@@ -8,6 +8,9 @@ for the drivers to arrive.
 Results from the 2026-09-21 run are in **[BRINGUP.md](BRINGUP.md)** — what was
 confirmed, what is still inferred, and what these tests do not cover.
 
+As-built wiring for Motor 1 and the TB6612 is in **[WIRING.md](WIRING.md)**,
+including two corrections to the Pipecrawler Pinout Sheet.
+
 ## Wiring
 
 Per the Pipecrawler Pinout Sheet, Motor 1. The N20 6-pin connector splits into

@@ -84,6 +84,99 @@ identified those trials as hand-slip rather than measurement.
 Counts per revolution must be even, since this decoder counts both edges of A
 (counts = 2 × PPR).
 
+## Driver bring-up — 2026-09-23
+
+TB6612FNG fitted, Motor 1 driven through it at 20 kHz PWM. **No decoupling
+capacitors fitted for these runs.**
+
+| Duty | Direction A (counts/s) | Direction B (counts/s) | Coherence |
+|---|---|---|---|
+| 20% | +614.7 | −688.0 | 100% |
+| 40% | +1448.2 | −1460.6 | 100% |
+| 60% | +2225.2 | −2235.7 | 100% |
+| 80% | +3008.0 | −3010.0 | 100% |
+| 100% | +3778.9 | −3770.8 | 100% |
+
+**PWM noise does not reach the encoder.** Zero reversals at all ten operating
+points, with the bridge chopping current and no capacitors fitted. This was the
+open question from the 2026-09-21 DC-only results.
+
+**Driver loss is negligible.** 100% duty gives 3778.9 counts/s against 3780 for
+the motor wired straight to the PSU at 12 V — a 0.03% difference, expected at
+~50–100 mA, far below the 1 A at which the TB6612's saturation voltage is
+specified.
+
+**Direction signs are opposite**, confirming AIN1/AIN2 are correct.
+
+### Low-speed asymmetry
+
+Step sizes between duty points:
+
+| Step | Direction A | Direction B |
+|---|---|---|
+| 20→40% | **+833.5** | +772.6 |
+| 40→60% | +777.0 | +775.1 |
+| 60→80% | +782.8 | +774.3 |
+| 80→100% | +770.9 | +760.8 |
+
+Direction B is linear throughout. Direction A is not: 20% duty yields 614.7
+against B's 688.0, a 12% shortfall that has disappeared by 40%. This is
+stiction, and worm gearboxes commonly show direction-dependent friction.
+
+Consequence for control: an open-loop duty-to-speed table calibrated in one
+direction will undershoot in the other at low speed. Prefer a closed velocity
+loop. The dead zone below 20% duty has not been mapped.
+
+## Both motors — 2026-09-23
+
+Motor 2 wired to channel B (BIN1 GP6, BIN2 GP7, PWMB GP5, encoder GP12/GP13).
+STBY shared. Both encoders decoded by their own PIO state machine, sharing one
+copy of the program in instruction memory.
+
+**Coherence was 100% in every row of every pass** — both motors, both
+directions, matched and opposed, 10% to 100% duty. Motor 2's encoder on
+GP12/GP13 is as clean as Motor 1's, and running two state machines concurrently
+causes no interference.
+
+### Speed matching
+
+`diff` is (M1 − M2) as a percentage of the faster.
+
+| Duty | Same direction | Opposed |
+|---|---|---|
+| 10% | −1.3% | +0.7% |
+| 20% | −0.5% | +0.7% |
+| 40% | +0.3% | +1.3% |
+| 60% | +0.7% | +1.0% |
+| 80% | +0.8% | +1.3% |
+| 100% | +0.9% | +1.6% |
+
+Under 2% across the whole range. Motor 2 is consistently marginally slower at
+high duty, and the gap is slightly wider opposed than aligned, suggesting mild
+direction-dependent friction in M2.
+
+Opposed directions produce opposite signs, confirming BIN1/BIN2 polarity and
+independent channel control.
+
+### Cold stiction — important for control design
+
+Motor 2's first-ever movement, standalone direction A, read **0.0 counts/s at
+both 10% and 20% duty**. The same motor, same direction, same duty, in the
+later paired pass read +304.2 and +690.3.
+
+The difference is thermal and mechanical state: the standalone A pass ran from
+cold and fully at rest, while by the paired pass the motor had already been to
+100% duty. Breakaway torque from cold exceeds what 20% duty delivers, but 10% is
+enough to sustain motion once moving.
+
+Not yet confirmed — the test is to let it sit several minutes and re-run the
+standalone pass. Zeros from cold and motion when warm confirms stiction.
+
+**Consequence:** open-loop duty commands will not start reliably. Use a
+kick-start pulse above breakaway, or integral action in the velocity loop that
+winds up until the motor breaks free. A crawler that stalls on start-up deep in
+a pipe is an expensive way to rediscover this.
+
 ## Open items
 
 - **Confirm counts per motor revolution** with clean single-turn trials
@@ -93,9 +186,6 @@ Counts per revolution must be even, since this decoder counts both edges of A
   run at 3V, time N output revolutions, then
   `counts_per_output_rev = 862 × seconds ÷ N`. Dividing by 20 also yields the
   true gearbox ratio, worth checking against the listing.
-- **Direction sign on lead swap** — not yet done. Needed before wiring
-  AIN1/AIN2 on the TB6612.
-- **Motor 2** — untested. Encoder maps to GP12/GP13 per the pinout sheet.
 - **UART to the Radxa** — untested.
 
 ## Not covered by these results
