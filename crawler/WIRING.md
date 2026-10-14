@@ -110,7 +110,7 @@ positive. If anything is rewired, update the `LEFT` / `RIGHT` lines in
 
 Encoders run at **3.3 V only**: RP2040 GPIO is not 5 V tolerant, and the N20
 encoders are push-pull outputs that work fine at 3.3 V (verified 2026-09-21,
-~78,000 counts at 100% coherence — [BRINGUP.md](../old/rp2040/BRINGUP.md)).
+~78,000 counts at 100% coherence — [BRINGUP.md](../tests/rp2040/BRINGUP.md)).
 
 ## Camera
 

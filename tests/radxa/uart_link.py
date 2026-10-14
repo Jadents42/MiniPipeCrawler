@@ -13,7 +13,7 @@ runs both motors for a few seconds and stops.
 Needs the UART4-M1 overlay enabled in `sudo rsetup` (Overlays), then a reboot,
 and your user in the dialout group: `sudo usermod -aG dialout $USER`, re-login.
 Wiring: Radxa pin 16 (RX) <- RP2040 GP0, pin 18 (TX) -> RP2040 GP1, pin 6 GND.
-Protocol is documented in running/rp2040/main.py.
+Protocol is documented in crawler/rp2040/main.py.
 """
 
 import argparse

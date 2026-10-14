@@ -12,7 +12,7 @@ environment.  Any drop from 100% here is PWM noise reaching the encoder lines.
 Prerequisites: VM = 12V, VCC = 3.3V, all three TB6612 GND pins tied to the star
 ground.  Run driver_check.py first to verify the control wiring.
 
-    python3 -m mpremote connect COM6 run old\rp2040\motor_test.py
+    python3 -m mpremote connect COM6 run tests\rp2040\motor_test.py
 """
 
 import time

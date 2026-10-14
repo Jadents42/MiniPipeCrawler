@@ -11,7 +11,7 @@ offset, so both share one copy of the decoder in PIO instruction memory.
 
 STBY is shared and enables both channels.
 
-    python3 -m mpremote connect COM6 run old\rp2040\dual_motor_test.py
+    python3 -m mpremote connect COM6 run tests\rp2040\dual_motor_test.py
 """
 
 import time

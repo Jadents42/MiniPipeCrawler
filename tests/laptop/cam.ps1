@@ -3,7 +3,7 @@
 # Start the stream on the Radxa first:
 #   gst-launch-1.0 v4l2src device=/dev/video-camera0 ! video/x-raw,format=NV12,width=1280,height=720 ! mpph264enc ! h264parse config-interval=-1 ! video/x-h264,stream-format=byte-stream,alignment=au ! tcpserversink host=0.0.0.0 port=5000 sync=false
 #
-# Then from the repo root:   .\old\laptop\cam.ps1
+# Then from the repo root:   .\tests\laptop\cam.ps1
 
 param([string]$Radxa = "192.168.137.2", [int]$Port = 5000)
 

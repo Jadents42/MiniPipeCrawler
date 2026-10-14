@@ -6,13 +6,13 @@ Pipecrawler - Radxa server: camera stream + drive bridge in one process.
 
   * Camera: GStreamer, hardware H.264, raw byte-stream on TCP port 5000.
     Restarted automatically if it dies.
-  * Drive bridge: TCP port 5001.  One client (running/laptop/drive.py on the laptop)
+  * Drive bridge: TCP port 5001.  One client (crawler/laptop/drive.py on the laptop)
     sends M / STOP / ZERO / PING lines; they go straight to the RP2040 over
     UART, and the RP2040's E telemetry lines come straight back.
     If the client disconnects, the bridge sends STOP immediately.  The RP2040's
     own 0.5 s watchdog backs that up if this program dies.
 
-Protocol is documented in running/rp2040/main.py.
+Protocol is documented in crawler/rp2040/main.py.
 """
 
 import argparse

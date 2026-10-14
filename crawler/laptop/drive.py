@@ -1,9 +1,9 @@
 """
 Pipecrawler driver station - live camera + tank controls in one window.
 
-    python running\\laptop\\drive.py
+    python crawler\\laptop\\drive.py
 
-Needs running/radxa/crawler_server.py running on the Radxa.  Keys only work
+Needs crawler/radxa/crawler_server.py running on the Radxa.  Keys only work
 while this window is focused; click away and the crawler stops.
 
      Q  W  E  R        Q / W  left / right forward  SLOW

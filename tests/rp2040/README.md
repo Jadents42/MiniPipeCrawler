@@ -8,7 +8,7 @@ for the drivers to arrive.
 Results from the 2026-09-21 run are in **[BRINGUP.md](BRINGUP.md)** — what was
 confirmed, what is still inferred, and what these tests do not cover.
 
-As-built wiring for Motor 1 and the TB6612 is in **[WIRING.md](../../running/WIRING.md)**,
+As-built wiring for Motor 1 and the TB6612 is in **[WIRING.md](../../crawler/WIRING.md)**,
 including two corrections to the Pipecrawler Pinout Sheet.
 
 ## Wiring
@@ -74,8 +74,8 @@ only, which is why the MQ-135 gets one on its analog output but full 5V on Vcc.
    land in:
    ```
    python3 -m pip install --user mpremote
-   python3 -m mpremote connect COM6 fs cp old\rp2040\encoder_test.py :encoder_test.py
-   python3 -m mpremote connect COM6 run old\rp2040\hand_test.py
+   python3 -m mpremote connect COM6 fs cp tests\rp2040\encoder_test.py :encoder_test.py
+   python3 -m mpremote connect COM6 run tests\rp2040\hand_test.py
    ```
    Ctrl-C stops it. `python3 -m mpremote connect COM6 repl` drops you at a prompt.
 

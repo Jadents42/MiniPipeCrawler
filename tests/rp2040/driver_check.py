@@ -11,7 +11,7 @@ a mistake still costs nothing.
 Only VCC (3.3V) needs to be connected for this.  With VM absent the outputs
 cannot drive anything, so nothing can move and nothing can be damaged.
 
-    python3 -m mpremote connect COM6 run old\rp2040\driver_check.py
+    python3 -m mpremote connect COM6 run tests\rp2040\driver_check.py
 """
 
 import time

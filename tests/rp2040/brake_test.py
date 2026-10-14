@@ -15,7 +15,7 @@ really is connected to AO1/AO2 - none of which needs a meter.
 
 Requires 12V on VM.  Run with the motor connected to the driver as normal.
 
-    python3 -m mpremote connect COM6 run old\rp2040\brake_test.py
+    python3 -m mpremote connect COM6 run tests\rp2040\brake_test.py
 """
 
 import time

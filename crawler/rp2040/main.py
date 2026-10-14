@@ -35,8 +35,8 @@ every WATCHDOG_MS.  If it goes quiet (script crashed, cable pulled), both motors
 stop and STBY drops.  Send M at ~10 Hz to keep driving.
 
 Upload (RP2040 on USB, Radxa 5V wire unplugged), from the repo root:
-    python -m mpremote connect COM3 cp running/rp2040/main.py :main.py
-Self-contained: the PIO decoder is copied from old/rp2040/encoder_test.py.
+    python -m mpremote connect COM3 cp crawler/rp2040/main.py :main.py
+Self-contained: the PIO decoder is copied from tests/rp2040/encoder_test.py.
 """
 
 import time
