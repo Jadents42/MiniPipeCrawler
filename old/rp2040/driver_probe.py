@@ -20,7 +20,7 @@ that all three GND pins are tied to the star ground.
 If the motor is connected and the driver works, it will spin during this - that
 by itself answers the question.
 
-    python3 -m mpremote connect COM6 run firmware\rp2040\driver_probe.py
+    python3 -m mpremote connect COM6 run old\rp2040\driver_probe.py
 """
 
 import time

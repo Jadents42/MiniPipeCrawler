@@ -10,7 +10,7 @@ product listing.
 Hands-free: spin the disc TURNS_PER_TRIAL times, stop, hold still, and the trial
 reports itself.  Repeat for as many trials as you like.  Ctrl-C for the summary.
 
-    python3 -m mpremote connect COM6 run firmware\rp2040\cpr_test.py
+    python3 -m mpremote connect COM6 run old\rp2040\cpr_test.py
 """
 
 import time

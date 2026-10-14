@@ -17,7 +17,7 @@ confirms continuity AND correct mapping in one pass.
     #  A 1k resistor in series is cheap insurance.             #
     ############################################################
 
-    python3 -m mpremote connect COM6 run firmware\rp2040\logic_probe.py
+    python3 -m mpremote connect COM6 run old\rp2040\logic_probe.py
 """
 
 import time
